@@ -7,7 +7,7 @@ import java.nio.channels.FileLock;
 
 public class RentalShop {
     // File Paths and Car Types 
-    private static final String FILES_DIR = "src" + File.separator + "files";
+    private static final String FILES_DIR = "src" + File.separator + "stores";
     private static final String RENTED_FILE = FILES_DIR + File.separator + "rented.txt";
     private static final String[] CAR_TYPES = {"SEDAN", "SUV", "VAN"};
 
