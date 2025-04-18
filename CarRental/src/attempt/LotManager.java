@@ -1,36 +1,35 @@
-package lib;
+package attempt;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import java.util.*;
 
 public class LotManager {
+    // Constants for file paths 
     private static final String FILES_DIR = "src" + File.separator + "files";
     private static final String INDEX_FILE = FILES_DIR + File.separator + "index.txt";
+    private static final String[] VEHICLE_TYPES = {"SEDAN", "SUV", "VAN"};
+
+    // Vehicle counts 
     private static int sedans;
     private static int suvs;
-    private static int vans;
-    
+    private static int vans; 
+
+    // Main method to run and create the lot manager 
     public static void main(String[] args) {
         // Create the files directory if it doesn't exist 
-        File filesDir = new File(FILES_DIR); 
+        File filesDir = new File(FILES_DIR);
         if (!filesDir.exists()) {
-            boolean created = filesDir.mkdir();
-            if (!created) {
-                System.out.println("Error: Could not create the 'files' directory.");
+            if (!filesDir.mkdir()) {
+                System.out.println("ERROR: Could not create the 'files' directory.");
                 System.exit(1);
             }
         }
 
-        // Parse CLI arguments
+        // Parse the arguments from the CLI
         Map<String, String> params = parseArgs(args);
         String lotName = params.get("lot-name");
         if (lotName == null || lotName.isEmpty()) {
-            System.out.println("Error: --lot-name argument is required.");
+            System.out.println("ERROR: --lot-name argument is required.");
             System.exit(1);
         }
 
@@ -42,7 +41,7 @@ public class LotManager {
             suvs = params.containsKey("add-suv") ? Integer.parseInt(params.get("add-suv")) : 0;
             vans = params.containsKey("add-van") ? Integer.parseInt(params.get("add-van")) : 0;
         } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid number format for vehicle counts.");
+            System.out.println("ERROR: Invalid number format for vehicle counts.");
             System.exit(1);
         }
 
@@ -54,18 +53,13 @@ public class LotManager {
         for (int i = 0; i < suvs; i++) { vehicles.add(createNewVehicle("suv")); }
         for (int i = 0; i < vans; i++) { vehicles.add(createNewVehicle("van")); }
 
-        
         // Check for deletes 
         if (params.containsKey("remove-vehicle")) {
             String licensePlate = params.get("remove-vehicle");
-            if (licensePlate == null || licensePlate.isEmpty()) {
-                System.out.println("Error: --remove-vehicle argument is required.");
-                System.exit(1);
-            }
             vehicles.removeIf(vehicle -> vehicle.getLicensePlate().equals(licensePlate));
         }
 
-        // Add state to the lot 
+        // Add the vehicles to the lot file 
         addVehiclesToLot(lotFile, vehicles);
     }
 
@@ -103,19 +97,18 @@ public class LotManager {
             System.out.println("Error writing to file: " + e.getMessage());
         }
     }
+    
 
-    // Method to create a new vehicle object
+    // Method to create a new vehicle
     private static Vehicle createNewVehicle(String type) {
-        if (type.equals("sedan")) {
-            return new Vehicle(generateLicensePlate(), "Sedan", 0);
-        } else if (type.equals("suv")) {
-            return new Vehicle(generateLicensePlate(), "SUV", 0);
-        } else if (type.equals("van")) {
-            return new Vehicle(generateLicensePlate(), "Van", 0);
-        } else {
-            throw new IllegalArgumentException("Unknown vehicle type: " + type);
+        for (String vehicleType : VEHICLE_TYPES) {
+            if (vehicleType.equalsIgnoreCase(type)) {
+                return new Vehicle(generateLicensePlate(), type.toUpperCase(), 0);
+            }
         }
-    } 
+
+        throw new IllegalArgumentException("Invalid vehicle type: " + type);
+    }
 
     // Method to generate a random unique license plate
     private static String generateLicensePlate() {
@@ -166,7 +159,7 @@ public class LotManager {
         }
     }
 
-    // Method to parse the flags and arguments from the command line, into a HashMap; keys are flags, values are arguments
+    // Method to parse the flags 
     public static Map<String, String> parseArgs(String[] args) {
         Map<String, String> params = new HashMap<>();
         for(String arg : args) {
