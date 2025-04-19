@@ -1,10 +1,11 @@
 package tests;
 
-import classes.RentalShop;
 import java.util.Arrays;
 import java.util.List;
 
-public class RentalShopInit {
+import classes.RentalShop;
+
+public class RentalShopInit2 {
     public static void main(String[] args) {
         // Initialize the rental shop with a city name, number of spaces, and parking lots
         String city = "Lisbon";
@@ -17,6 +18,6 @@ public class RentalShopInit {
         System.out.println("Rental Shop initialized in " + city + " with " + spaces + " spaces.");
         System.out.println("Parking lots: " + lots);
         shop.printShopState();
-        shop.processCommand("RETURN MQK-512 100");
+        shop.processCommand("RETURN MPH-012 1");
     } 
 }

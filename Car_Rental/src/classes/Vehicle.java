@@ -15,7 +15,7 @@ public class Vehicle implements java.io.Serializable {
 
     // Getters
     public String getLicensePlate() { return licensePlate; }
-    public String getModel() { return type; }
+    public String getType() { return type; }
     public int getOdometer() { return odometer; }
 
     // Setters

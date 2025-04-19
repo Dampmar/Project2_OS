@@ -115,7 +115,7 @@ public class LotManager {
         // Write the file contents 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(lotFile))) {
             for (Vehicle vehicle : vehicles) {
-                writer.write(vehicle.getLicensePlate() + "," + vehicle.getModel() + "," + vehicle.getOdometer() + "\n");
+                writer.write(vehicle.getLicensePlate() + "," + vehicle.getType() + "," + vehicle.getOdometer() + "\n");
             }
         } catch (IOException e) {
             System.err.println("Error writing to lot file: " + e.getMessage());

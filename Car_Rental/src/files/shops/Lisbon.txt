@@ -1,7 +1,21 @@
-City: Lisbon
-Spaces: 10
-Balance: 0.0
+City:Lisbon
+Spaces:10
+Balance:339.0
+Lots:testLot,Lot,Lot2
 Vehicles:
-VMJ-708,SEDAN,0
-GNY-493,SUV,0
-XRP-121,VAN,0
+MPN-124,SUV,20
+MAN-123,VAN,143
+MAN-123,VAN,143
+MAN-123,VAN,143
+MAN-123,VAN,143
+MYP-197,SUV,1100
+MPH-012,SEDAN,1
+Transactions:
+TRANSACTION: MYP-197; Distance: 100 km; Discount: 0%; Amount: $100.0
+TRANSACTION: MAN-123; Distance: 20 km; Discount: 10%; Amount: $18.0
+TRANSACTION: MPH-197; Distance: 20 km; Discount: 0%; Amount: $20.0
+TRANSACTION: MPN-123; Distance: 5 km; Discount: 0%; Amount: $5.0
+TRANSACTION: MPN-124; Distance: 5 km; Discount: 0%; Amount: $5.0
+TRANSACTION: MPN-124; Distance: 100 km; Discount: 0%; Amount: $100.0
+TRANSACTION: MQK-512; Distance: 100 km; Discount: 10%; Amount: $90.0
+TRANSACTION: MPH-012; Distance: 1 km; Discount: 0%; Amount: $1.0
