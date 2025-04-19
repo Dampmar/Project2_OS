@@ -55,9 +55,9 @@ public class LotManager {
         List<Vehicle> vehicles = getContents(lotName);
 
         // Add new vehicles to the list
-        for (int i = 0; i < sedans; i++) { vehicles.add(VehicleFactory.createVehicle("sedan")); }
-        for (int i = 0; i < suvs; i++) { vehicles.add(VehicleFactory.createVehicle("suv")); }
-        for (int i = 0; i < vans; i++) { vehicles.add(VehicleFactory.createVehicle("van")); }
+        for (int i = 0; i < sedans; i++) { vehicles.add(VehicleFactory.createVehicle("SEDAN")); }
+        for (int i = 0; i < suvs; i++) { vehicles.add(VehicleFactory.createVehicle("SUV")); }
+        for (int i = 0; i < vans; i++) { vehicles.add(VehicleFactory.createVehicle("VAN")); }
 
         // Check for deletes 
         if (params.containsKey("remove-vehicle")) {

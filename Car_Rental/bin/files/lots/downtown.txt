@@ -1,0 +1,6 @@
+LKK-241,sedan,0
+OSS-364,sedan,0
+VTB-565,sedan,0
+MTO-858,sedan,0
+VSC-430,suv,0
+KWZ-181,van,0

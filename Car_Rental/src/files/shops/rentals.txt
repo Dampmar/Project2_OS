@@ -1,1 +1,1 @@
-MQK-512,SEDAN,200,false
+OAY-984,sedan,0,false

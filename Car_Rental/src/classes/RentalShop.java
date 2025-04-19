@@ -2,7 +2,6 @@ package classes;
 
 import utils.*;
 
-import java.beans.PersistenceDelegate;
 import java.io.*;
 import java.util.*;
 import java.nio.channels.FileChannel;
@@ -456,4 +455,21 @@ public class RentalShop {
         }
     }
 
+    /**
+     * Run the RentalShop application
+     */
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Rental Shop in " + city + "! Type 'exit' to quit.");
+        System.out.println("Command: RENT <vehicle_type>, RETURN <license_plate> <kilometers>, LIST, TRANSACTIONS");
+        while (true) {
+            System.out.print("> ");
+            String command = scanner.nextLine().trim();
+            if (command.equalsIgnoreCase("exit") || command == null) {
+                break; // Exit the loop if the user types 'exit'
+            }
+            processCommand(command); // Process the command entered by the user
+        }
+        scanner.close(); // Close the scanner
+    }
 }
