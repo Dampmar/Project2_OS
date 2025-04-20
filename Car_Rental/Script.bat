@@ -25,7 +25,7 @@ goto menu
 :: Compile the Project
 :compile
 echo Compiling Java files...
-javac -d bin -sourcepath src src/utils/*.java src/classes/*.java
+javac -d bin -sourcepath src src/utils/*.java src/classes/*.java src/App.java
 echo Compilation complete.
 pause 
 goto menu 
