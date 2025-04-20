@@ -11,7 +11,6 @@ public class RentalShop {
     // File Directory 
     private static final String FILES_DIR = "src" + File.separator + "files" + File.separator + "shops";
     private static final String LOTS_DIR = "src" + File.separator + "files" + File.separator + "lots";
-    private static final String RENT_FILE = FILES_DIR + File.separator + "rentals.txt";
     private static final String[] CAR_TYPES = {"SEDAN", "SUV", "VAN"};
 
     // Attributes 
@@ -103,6 +102,7 @@ public class RentalShop {
         // Print the shop state
         System.out.println("----SHOP STATE (" + city + ")----");
         System.out.println("Total Parking Spaces: " + spaces);
+        System.out.println("Available Parking Spaces: " + (spaces - vehicles.size()));
         System.out.println("Current Balance: $" + balance);
         System.out.println("Parking Lots: " + String.join(", ", lots));
         System.out.println("Vehicles: ");

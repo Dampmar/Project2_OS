@@ -1,0 +1,158 @@
+@startuml ClassDiagram
+class LotManager {
+    - static final String LOTS_DIR
+    - static final String VEHICLE_TYPES
+
+    - static int sedans 
+    - static int suvs 
+    - static int vans
+
+    + static main(String[] args): void
+    - static getContents(String lotName): List<Vehicle>
+    - static addContents(String lotName, List<Vehicle> vehicles): void
+}
+
+class RentalShop {
+    - static final String FILES_DIR
+    - static final String LOTS_DIR
+    - static final String[] CAR_TYPES
+
+    - String city 
+    - int spaces 
+    - double balance 
+    - List<String> lots 
+    - List<Vehicle> vehicles 
+    - List<Transaction> transactions
+
+    -----
+    + RentalShop(String city, int spaces, List<String> lots)
+    + RentalShop(String shopFile, String city)
+
+    .."Getters"..
+    + getCity(): String
+    + getSpaces(): int
+    + getBalance(): double
+    + getShopFile(): String 
+    + getLots(): List<String>
+    + getVehicles(): List<Vehicle>
+    + getTransactions(): List<Transaction>
+
+    .."Setters"..
+    + setSpaces(spaces: int): void
+    + setBalance(balance: double): void
+    + setShopFile(shopFile: String): void
+    + setLots(lots: List<String>): void
+    + setVehicles(vehicles: List<Vehicle>): void
+    + setTransactions(transactions: List<Transaction>): void
+
+    .."Helpers"..
+    + addLot(lot: String): void
+    + addVehicle(Vehicle vehicle): void
+    + addTransaction(Transaction transaction): void
+
+    .."ProjectMethods"..
+    + processCommand(command: String): void
+    + run(): void
+    + printShopState(): void
+    + printShopTransactions(): void
+    + requestVehicle(type: String): VehicleRetrival
+    - initializeShopData(): void
+    - rentVehicle(vehicleType: String): void
+    - returnVehicle(licensePlate: String, kilometers: int): void
+    - checkThreshold(): void
+    - returnVehicleToLot(vehicle: Vehicle): boolean 
+}
+
+class RentInfo <<Serializable>> {
+    - static final long serialVersionUID
+    - Vehicle vehicle 
+    - boolean discount
+
+    + RentInfo(Vehicle vehicle, boolean discount)
+    + getVehicle(): vehicle
+    + isDiscount(): boolean
+}
+
+class Transaction <<Serializable>> {
+    - static final long serialVersionUID
+    - String licensePlate
+    - int distance
+    - boolean discount 
+    - double amount 
+    + Transaction(licensePlate: String, kms: int, discount: boolean, charge: double)
+    + isDiscount(): boolean
+    + getAmount(): double
+    + getLicensePlate(): String
+    + getDistance(): int
+    + toString(): String
+}
+
+class Vehicle <<Serializable>> {
+    - static final long serialVersionUID
+    - String licensePlate
+    - String type
+    - int odometer
+    + Vehicle(licensePlate: String, type: String, odometer: int)
+    + getLicensePlate(): String
+    + getType(): String
+    + getOdometer(): int
+    + addToOdometer(kilometers: int): void
+    + toString(): String
+}
+
+class VehicleRetrival {
+    - Vehicle vehicle
+    - String lot
+    + VehicleRetrival(vehicle: Vehicle, lot: String)
+    + getVehicle(): Vehicle
+    + getLot(): String
+}
+
+class LicensePlateGenerator {
+    - static final String INDEX_FILE
+    + generateLicensePlate(): String
+    - readExistingPlates(): List<String>
+    - savePlateToIndex(plate: String): void
+}
+
+class ParseArgs {
+    + static parseArgs(String[] args): Map<String, String>
+}
+
+class RentalFileManager {
+    - static final String FILES_DIR
+    - static final String RENT_FILE
+    + addToRentalFile(rentInfo: RentInfo): boolean
+    + checkRentalRecord(licensePlate: String): RentInfo
+    + removeFromRentalFile(licensePlate: String): boolean
+}
+
+class ShopPersistanceManager {
+    - static final String FILES_DIR
+    + saveShop(shop: RentalShop): boolean
+    + loadShop(city: String): RentalShop
+}
+
+class VehicleFactory {
+    - static final String[] VEHICLE_TYPES
+    + static createVehicle(type: String): Vehicle
+}
+
+class App {
+    + static main(String[] args): void 
+}
+
+App "1" --> "1" RentalShop : "creates and manages"
+LotManager "1" --> "1" ParseArgs : "uses"
+LotManager "1" --> "*" Vehicle : "creates/removes"
+RentalShop "1" --> "*" Vehicle : "manages" 
+RentalShop "1" --> "*" Transaction : "generates"
+RentalShop "1" --> "*" RentInfo : "controls"
+RentalShop "1" --> "*" VehicleRetrival : "makes"
+VehicleRetrival "1" --> "1" Vehicle : "contains"
+RentInfo "1" --> "1" Vehicle : "contains"
+RentalFileManager "1" --> "*" RentInfo : "synchronizes addition/removal"
+ShopPersistanceManager "1" --> "*" RentalShop : "synchronizes"
+VehicleFactory "1" --> "*" Vehicle : "generates unique"
+VehicleFactory "1" --> "1" LicensePlateGenerator : "uses"
+@enduml

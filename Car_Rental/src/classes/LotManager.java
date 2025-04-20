@@ -7,7 +7,7 @@ import java.util.*;
 
 public class LotManager {
     // Constant for file directory
-    private static final String FILES_DIR = "src" + File.separator + "files" + File.separator + "lots";
+    private static final String LOTS_DIR = "src" + File.separator + "files" + File.separator + "lots";
     private static final String[] VEHICLE_TYPES = {"SEDAN", "SUV", "VAN"};
 
     // Vehicle counts 
@@ -26,10 +26,10 @@ public class LotManager {
      */
     public static void main(String[] args) {
         // Create the directory if it doesn't exist 
-        File dir = new File(FILES_DIR);
+        File dir = new File(LOTS_DIR);
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
-                System.err.println("Error creating directory: " + FILES_DIR);
+                System.err.println("Error creating directory: " + LOTS_DIR);
                 System.exit(1);
             }
         }
@@ -76,7 +76,7 @@ public class LotManager {
      */
     private static List<Vehicle> getContents(String lotName) {
         List<Vehicle> vehicles = new ArrayList<>();
-        File lotFile = new File(FILES_DIR + File.separator + lotName + ".txt");
+        File lotFile = new File(LOTS_DIR + File.separator + lotName + ".txt");
 
         // Create the file if it doesn't exist 
         if (!lotFile.exists()) {
@@ -110,7 +110,7 @@ public class LotManager {
      * @param vehicles List of vehicles to write
      */
     private static void addContents(String lotName, List<Vehicle> vehicles) {
-        File lotFile = new File(FILES_DIR + File.separator + lotName + ".txt");
+        File lotFile = new File(LOTS_DIR + File.separator + lotName + ".txt");
 
         // Write the file contents 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(lotFile))) {
