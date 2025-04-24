@@ -10,8 +10,8 @@ public class App {
     public static void main(String[] args) {
         Map<String, String> params = ParseArgs.parseArgs(args);
         String city = params.get("location");
-        if (city == null || city.isEmpty()) {
-            System.out.println("ERROR: Please provide a valid city name using --location=<city>.");
+        if (city == null || city.isEmpty() || city.equals("rentals")) {
+            System.out.println("ERROR: Please provide a valid city name using --location=<city>. P.S. rentals is not a valid city name.");
             return;
         }
         
